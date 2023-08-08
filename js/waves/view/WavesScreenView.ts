@@ -6,10 +6,10 @@
  * @author Sam Reid (PhET Interactive Simulations)
  */
 
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+// import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Multilink from '../../../../axon/js/Multilink.js';
-import Property from '../../../../axon/js/Property.js';
-import Bounds2 from '../../../../dot/js/Bounds2.js';
+// import Property from '../../../../axon/js/Property.js';
+// import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Matrix3 from '../../../../dot/js/Matrix3.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import ScreenView from '../../../../joist/js/ScreenView.js';
@@ -17,10 +17,10 @@ import { Shape } from '../../../../kite/js/imports.js';
 import merge from '../../../../phet-core/js/merge.js';
 import platform from '../../../../phet-core/js/platform.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
-import MeasuringTapeNode from '../../../../scenery-phet/js/MeasuringTapeNode.js';
+// import MeasuringTapeNode from '../../../../scenery-phet/js/MeasuringTapeNode.js';
 import TimeControlNode from '../../../../scenery-phet/js/TimeControlNode.js';
 import VisibleColor from '../../../../scenery-phet/js/VisibleColor.js';
-import { Color, DragListener, Node, Rectangle, RichText, Text, Utils } from '../../../../scenery/js/imports.js';
+import { Color, Node, Rectangle, RichText, Text, Utils } from '../../../../scenery/js/imports.js';
 import ToggleNode from '../../../../sun/js/ToggleNode.js';
 import SoundClip from '../../../../tambo/js/sound-generators/SoundClip.js';
 import soundManager from '../../../../tambo/js/soundManager.js';
@@ -40,7 +40,7 @@ import SceneToggleNode from '../../common/view/SceneToggleNode.js';
 import SoundParticleCanvasLayer from '../../common/view/SoundParticleCanvasLayer.js';
 import SoundParticleImageLayer from '../../common/view/SoundParticleImageLayer.js';
 import SoundWaveGeneratorNode from '../../common/view/SoundWaveGeneratorNode.js';
-import ToolboxPanel from '../../common/view/ToolboxPanel.js';
+// import ToolboxPanel from '../../common/view/ToolboxPanel.js';
 import ViewpointRadioButtonGroup from '../../common/view/ViewpointRadioButtonGroup.js';
 import WaterDropLayer from '../../common/view/WaterDropLayer.js';
 import WaterSideViewNode from '../../common/view/WaterSideViewNode.js';
@@ -48,8 +48,8 @@ import WaterWaveGeneratorNode from '../../common/view/WaterWaveGeneratorNode.js'
 import WaveAreaGraphNode from '../../common/view/WaveAreaGraphNode.js';
 import WaveAreaNode from '../../common/view/WaveAreaNode.js';
 import WaveInterferenceControlPanel from '../../common/view/WaveInterferenceControlPanel.js';
-import WaveInterferenceStopwatchNode from '../../common/view/WaveInterferenceStopwatchNode.js';
-import WaveMeterNode from '../../common/view/WaveMeterNode.js';
+// import WaveInterferenceStopwatchNode from '../../common/view/WaveInterferenceStopwatchNode.js';
+// import WaveMeterNode from '../../common/view/WaveMeterNode.js';
 import WaveInterferenceConstants from '../../common/WaveInterferenceConstants.js';
 import WaveInterferenceUtils from '../../common/WaveInterferenceUtils.js';
 import waveInterference from '../../waveInterference.js';
@@ -277,138 +277,138 @@ class WavesScreenView extends ScreenView {
      * Return the measuring tape Property value for the specified scene.  See MeasuringTapeNode constructor docs.
      * @param scene
      */
-    const getMeasuringTapeValue = scene => {
-      return {
-        name: scene.translatedPositionUnits,
+    // const getMeasuringTapeValue = scene => {
+    //   return {
+    //     name: scene.translatedPositionUnits,
 
-        // The measuring tape tip and tail are in the view coordinate frame, this scale factor converts to model
-        // coordinates according to the scene
-        multiplier: scene.waveAreaWidth / this.waveAreaNode.width
-      };
-    };
+    //     // The measuring tape tip and tail are in the view coordinate frame, this scale factor converts to model
+    //     // coordinates according to the scene
+    //     multiplier: scene.waveAreaWidth / this.waveAreaNode.width
+    //   };
+    // };
 
-    const measuringTapeProperty = new Property( getMeasuringTapeValue( model.sceneProperty.value ) );
-    model.sceneProperty.link( scene => measuringTapeProperty.set( getMeasuringTapeValue( scene ) ) );
+    // const measuringTapeProperty = new Property( getMeasuringTapeValue( model.sceneProperty.value ) );
+    // model.sceneProperty.link( scene => measuringTapeProperty.set( getMeasuringTapeValue( scene ) ) );
 
-    /**
-     * Checks if the toolbox intersects the given bounds, to see if a tool can be dropped back into the toolbox.
-     */
-    const toolboxIntersects = b => toolboxPanel.parentToGlobalBounds( toolboxPanel.bounds ).intersectsBounds( b );
+    // /**
+    //  * Checks if the toolbox intersects the given bounds, to see if a tool can be dropped back into the toolbox.
+    //  */
+    // // const toolboxIntersects = b => toolboxPanel.parentToGlobalBounds( toolboxPanel.bounds ).intersectsBounds( b );
 
-    const measuringTapeNode = new MeasuringTapeNode( measuringTapeProperty, {
+    // const measuringTapeNode = new MeasuringTapeNode( measuringTapeProperty, {
 
-      // translucent white background, same value as in Projectile Motion, see https://github.com/phetsims/projectile-motion/issues/156
-      textBackgroundColor: 'rgba( 255, 255, 255, 0.6 )',
-      textColor: 'black',
-      basePositionProperty: model.measuringTapeBasePositionProperty,
-      tipPositionProperty: model.measuringTapeTipPositionProperty,
+    //   // translucent white background, same value as in Projectile Motion, see https://github.com/phetsims/projectile-motion/issues/156
+    //   textBackgroundColor: 'rgba( 255, 255, 255, 0.6 )',
+    //   textColor: 'black',
+    //   basePositionProperty: model.measuringTapeBasePositionProperty,
+    //   tipPositionProperty: model.measuringTapeTipPositionProperty,
 
-      baseDragStarted: () => {
-        grabSound.play();
-      },
+    //   baseDragStarted: () => {
+    //     grabSound.play();
+    //   },
 
-      // Drop in toolbox
-      baseDragEnded: () => {
-        releaseSound.play();
-        if ( toolboxIntersects( measuringTapeNode.localToGlobalBounds( measuringTapeNode.getLocalBaseBounds() ) ) ) {
-          model.isMeasuringTapeInPlayAreaProperty.value = false;
+    //   // Drop in toolbox
+    //   baseDragEnded: () => {
+    //     releaseSound.play();
+    //     if ( toolboxIntersects( measuringTapeNode.localToGlobalBounds( measuringTapeNode.getLocalBaseBounds() ) ) ) {
+    //       model.isMeasuringTapeInPlayAreaProperty.value = false;
 
-          // Reset the rotation and length of the Measuring Tape when it is returned to the toolbox.
-          measuringTapeNode.reset();
-        }
-      }
-    } );
-    this.visibleBoundsProperty.link( visibleBounds => measuringTapeNode.setDragBounds( visibleBounds.eroded( 20 ) ) );
-    model.isMeasuringTapeInPlayAreaProperty.linkAttribute( measuringTapeNode, 'visible' );
+    //       // Reset the rotation and length of the Measuring Tape when it is returned to the toolbox.
+    //       measuringTapeNode.reset();
+    //     }
+    //   }
+    // } );
+    // this.visibleBoundsProperty.link( visibleBounds => measuringTapeNode.setDragBounds( visibleBounds.eroded( 20 ) ) );
+    // model.isMeasuringTapeInPlayAreaProperty.linkAttribute( measuringTapeNode, 'visible' );
 
-    const stopwatchNode = new WaveInterferenceStopwatchNode( model, {
-      dragBoundsProperty: this.visibleBoundsProperty,
+    // const stopwatchNode = new WaveInterferenceStopwatchNode( model, {
+    //   dragBoundsProperty: this.visibleBoundsProperty,
 
-      dragListenerOptions: {
-        start: () => {
-          grabSound.play();
-        },
-        end: () => {
-          releaseSound.play();
-          if ( toolboxIntersects( stopwatchNode.parentToGlobalBounds( stopwatchNode.bounds ) ) ) {
-            model.stopwatch.reset();
-          }
-        }
-      }
-    } );
+    //   dragListenerOptions: {
+    //     start: () => {
+    //       grabSound.play();
+    //     },
+    //     end: () => {
+    //       releaseSound.play();
+    //       if ( toolboxIntersects( stopwatchNode.parentToGlobalBounds( stopwatchNode.bounds ) ) ) {
+    //         model.stopwatch.reset();
+    //       }
+    //     }
+    //   }
+    // } );
 
-    const waveMeterNode = new WaveMeterNode( model, this );
-    model.resetEmitter.addListener( () => waveMeterNode.reset() );
-    model.resetEmitter.addListener( () => measuringTapeNode.reset() );
-    model.isWaveMeterInPlayAreaProperty.link( inPlayArea => waveMeterNode.setVisible( inPlayArea ) );
+    // const waveMeterNode = new WaveMeterNode( model, this );
+    // model.resetEmitter.addListener( () => waveMeterNode.reset() );
+    // model.resetEmitter.addListener( () => measuringTapeNode.reset() );
+    // model.isWaveMeterInPlayAreaProperty.link( inPlayArea => waveMeterNode.setVisible( inPlayArea ) );
 
-    // Original bounds of the waveMeterNode so we can set the draggable bounds accordingly, so it can go edge to edge
-    // in every dimension.
-    const bounds = waveMeterNode.backgroundNode.bounds.copy();
+    // // Original bounds of the waveMeterNode so we can set the draggable bounds accordingly, so it can go edge to edge
+    // // in every dimension.
+    // const bounds = waveMeterNode.backgroundNode.bounds.copy();
 
-    // Subtract the dimensions from the visible bounds so that it will abut the edge of the screen
-    const waveMeterBoundsProperty = new DerivedProperty( [ this.visibleBoundsProperty ], visibleBounds => {
-      return new Bounds2(
-        visibleBounds.minX - bounds.minX, visibleBounds.minY - bounds.minY,
-        visibleBounds.maxX - bounds.maxX, visibleBounds.maxY - bounds.maxY
-      );
-    } );
+    // // Subtract the dimensions from the visible bounds so that it will abut the edge of the screen
+    // const waveMeterBoundsProperty = new DerivedProperty( [ this.visibleBoundsProperty ], visibleBounds => {
+    //   return new Bounds2(
+    //     visibleBounds.minX - bounds.minX, visibleBounds.minY - bounds.minY,
+    //     visibleBounds.maxX - bounds.maxX, visibleBounds.maxY - bounds.maxY
+    //   );
+    // } );
 
-    // Keep the WaveMeterNode in bounds when the window is reshaped.
-    waveMeterBoundsProperty.link( bounds => {
-      const closestPointInBounds = bounds.closestPointTo( waveMeterNode.backgroundNode.translation );
-      return waveMeterNode.backgroundNode.setTranslation( closestPointInBounds );
-    } );
-    this.waveMeterNode = waveMeterNode;
-    waveMeterNode.setDragListener( new DragListener( {
-      dragBoundsProperty: waveMeterBoundsProperty,
-      translateNode: true,
-      start: () => {
-        grabSound.play();
-        waveMeterNode.moveToFront();
-        if ( waveMeterNode.synchronizeProbePositions ) {
+    // // Keep the WaveMeterNode in bounds when the window is reshaped.
+    // waveMeterBoundsProperty.link( bounds => {
+    //   const closestPointInBounds = bounds.closestPointTo( waveMeterNode.backgroundNode.translation );
+    //   return waveMeterNode.backgroundNode.setTranslation( closestPointInBounds );
+    // } );
+    // this.waveMeterNode = waveMeterNode;
+    // waveMeterNode.setDragListener( new DragListener( {
+    //   dragBoundsProperty: waveMeterBoundsProperty,
+    //   translateNode: true,
+    //   start: () => {
+    //     grabSound.play();
+    //     waveMeterNode.moveToFront();
+    //     if ( waveMeterNode.synchronizeProbePositions ) {
 
-          // Align the probes each time the waveMeterNode translates, so they will stay in sync
-          waveMeterNode.alignProbesEmitter.emit();
-        }
-      },
-      drag: () => {
-        if ( waveMeterNode.synchronizeProbePositions ) {
+    //       // Align the probes each time the waveMeterNode translates, so they will stay in sync
+    //       waveMeterNode.alignProbesEmitter.emit();
+    //     }
+    //   },
+    //   drag: () => {
+    //     if ( waveMeterNode.synchronizeProbePositions ) {
 
-          // Align the probes each time the waveMeterNode translates, so they will stay in sync
-          waveMeterNode.alignProbesEmitter.emit();
-        }
-      },
-      end: () => {
-        releaseSound.play();
-        // Drop in toolbox, using the bounds of the entire waveMeterNode since it cannot be centered over the toolbox
-        // (too close to the edge of the screen)
-        if ( toolboxIntersects( waveMeterNode.getBackgroundNodeGlobalBounds() ) ) {
-          waveMeterNode.reset();
-          model.isWaveMeterInPlayAreaProperty.value = false;
-        }
+    //       // Align the probes each time the waveMeterNode translates, so they will stay in sync
+    //       waveMeterNode.alignProbesEmitter.emit();
+    //     }
+    //   },
+    //   end: () => {
+    //     releaseSound.play();
+    //     // Drop in toolbox, using the bounds of the entire waveMeterNode since it cannot be centered over the toolbox
+    //     // (too close to the edge of the screen)
+    //     if ( toolboxIntersects( waveMeterNode.getBackgroundNodeGlobalBounds() ) ) {
+    //       waveMeterNode.reset();
+    //       model.isWaveMeterInPlayAreaProperty.value = false;
+    //     }
 
-        // Move probes to center line (if water side view model)
-        waveMeterNode.droppedEmitter.emit();
-        waveMeterNode.synchronizeProbePositions = false;
-      }
-    } ) );
+    //     // Move probes to center line (if water side view model)
+    //     waveMeterNode.droppedEmitter.emit();
+    //     waveMeterNode.synchronizeProbePositions = false;
+    //   }
+    // } ) );
 
-    const toolboxPanel = new ToolboxPanel( measuringTapeNode, stopwatchNode, waveMeterNode, alignGroup,
-      model.isMeasuringTapeInPlayAreaProperty, model.measuringTapeTipPositionProperty,
-      model.stopwatch.isVisibleProperty, model.isWaveMeterInPlayAreaProperty
-    );
-    const updateToolboxPosition = () => {
-      toolboxPanel.mutate( {
-        right: this.layoutBounds.right - MARGIN,
-        top: MARGIN
-      } );
-    };
-    updateToolboxPosition();
+    // const toolboxPanel = new ToolboxPanel( measuringTapeNode, stopwatchNode, waveMeterNode, alignGroup,
+    //   model.isMeasuringTapeInPlayAreaProperty, model.measuringTapeTipPositionProperty,
+    //   model.stopwatch.isVisibleProperty, model.isWaveMeterInPlayAreaProperty
+    // );
+    // const updateToolboxPosition = () => {
+    //   toolboxPanel.mutate( {
+    //     right: this.layoutBounds.right - MARGIN,
+    //     top: MARGIN
+    //   } );
+    // };
+    // updateToolboxPosition();
 
-    // When the alignGroup changes the size of the slitsControlPanel, readjust its positioning.
-    toolboxPanel.boundsProperty.lazyLink( updateToolboxPosition );
-    this.addChild( toolboxPanel );
+    // // When the alignGroup changes the size of the slitsControlPanel, readjust its positioning.
+    // toolboxPanel.boundsProperty.lazyLink( updateToolboxPosition );
+    // this.addChild( toolboxPanel );
 
     // @protected {WaveInterferenceControlPanel} for subtype layout
     this.controlPanel = new WaveInterferenceControlPanel( model, alignGroup, options.controlPanelOptions, {
@@ -418,7 +418,7 @@ class WavesScreenView extends ScreenView {
     const updateControlPanelPosition = () => {
       this.controlPanel.mutate( {
         right: this.layoutBounds.right - MARGIN,
-        top: toolboxPanel.bottom + SPACING
+        top: SPACING
       } );
     };
     updateControlPanelPosition();
@@ -437,6 +437,7 @@ class WavesScreenView extends ScreenView {
         } ) );
     }
 
+    // options.showViewpointRadioButtonGroup = false;
     if ( options.showViewpointRadioButtonGroup ) {
 
       const OFFSET_TO_ALIGN_WITH_TIME_CONTROL_RADIO_BUTTONS = 1.8;
@@ -454,7 +455,7 @@ class WavesScreenView extends ScreenView {
     }
 
     const timeControlNode = new TimeControlNode( model.isRunningProperty, {
-      timeSpeedProperty: model.timeSpeedProperty,
+      timeSpeedProperty: null,
       bottom: this.layoutBounds.bottom - MARGIN,
       left: this.waveAreaNode.centerX,
       speedRadioButtonGroupOptions: {
@@ -609,9 +610,9 @@ class WavesScreenView extends ScreenView {
     this.addChild( dashedLineNode );
     this.addChild( this.afterWaveAreaNode );
     this.addChild( waveAreaGraphNode );
-    this.addChild( measuringTapeNode );
-    this.addChild( stopwatchNode );
-    this.addChild( waveMeterNode );
+    // this.addChild( measuringTapeNode );
+    // this.addChild( stopwatchNode );
+    // this.addChild( waveMeterNode );
 
     // Only start up the audio system if sound is enabled for this screen
     if ( options.audioEnabled ) {

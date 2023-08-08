@@ -43,7 +43,7 @@ class BaseScreen extends Screen<WavesModel, WavesScreenView> {
       () => new WavesModel( options.scenes ? { scenes: options.scenes } : {} ),
       model => new WavesScreenView( model, alignGroup, {
         audioEnabled: options.audioEnabled,
-        showViewpointRadioButtonGroup: true,
+        showViewpointRadioButtonGroup: false,
         piecewiseLinearBrightness: true,
         lightScreenAveragingWindowSize: 40,
 

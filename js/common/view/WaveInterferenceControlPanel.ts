@@ -15,14 +15,14 @@ import WaveInterferenceConstants from '../WaveInterferenceConstants.js';
 import AmplitudeControl from './AmplitudeControl.js';
 import FrequencyControl from './FrequencyControl.js';
 import SceneRadioButtonGroup from './SceneRadioButtonGroup.js';
-import SoundViewTypeRadioButtonGroup from './SoundViewTypeRadioButtonGroup.js';
+// import SoundViewTypeRadioButtonGroup from './SoundViewTypeRadioButtonGroup.js';
 import WaveInterferenceCheckbox from './WaveInterferenceCheckbox.js';
 import WaveInterferencePanel from './WaveInterferencePanel.js';
 import WaveInterferenceText from './WaveInterferenceText.js';
 
 const graphString = WaveInterferenceStrings.graph;
 const intensityString = WaveInterferenceStrings.intensity;
-const playToneString = WaveInterferenceStrings.playTone;
+// const playToneString = WaveInterferenceStrings.playTone;
 const screenLabelString = WaveInterferenceStrings.screenLabel;
 const soundEffectString = WaveInterferenceStrings.soundEffect;
 
@@ -47,10 +47,10 @@ class WaveInterferenceControlPanel extends WaveInterferencePanel {
     const frequencyControl = new FrequencyControl( model );
     const amplitudeControl = new AmplitudeControl( model );
 
-    let soundViewTypeRadioButtonGroup = null;
-    if ( model.soundScene && model.soundScene.showSoundParticles ) {
-      soundViewTypeRadioButtonGroup = new SoundViewTypeRadioButtonGroup( model );
-    }
+    const soundViewTypeRadioButtonGroup = null;
+    // if ( model.soundScene && model.soundScene.showSoundParticles ) {
+    //   soundViewTypeRadioButtonGroup = new SoundViewTypeRadioButtonGroup( model );
+    // }
 
     const graphCheckbox = new WaveInterferenceCheckbox( model.showGraphProperty, new WaveInterferenceText( graphString, WaveInterferenceConstants.CONTROL_PANEL_TEXT_MAX_WIDTH_OPTIONS ) );
     const screenCheckbox = new WaveInterferenceCheckbox( model.showScreenProperty, new WaveInterferenceText( screenLabelString, WaveInterferenceConstants.CONTROL_PANEL_TEXT_MAX_WIDTH_OPTIONS ) );
@@ -60,7 +60,7 @@ class WaveInterferenceControlPanel extends WaveInterferencePanel {
     model.showScreenProperty.link( showScreen => intensityCheckbox.setEnabled( showScreen ) );
 
     const maxComponentWidth = _.max( [
-      ...( soundViewTypeRadioButtonGroup ? [ soundViewTypeRadioButtonGroup.width ] : [] ),
+      // ...( soundViewTypeRadioButtonGroup ? [ soundViewTypeRadioButtonGroup.width ] : [] ),
       screenCheckbox.width,
       graphCheckbox.width,
       frequencyControl.width,
@@ -89,24 +89,24 @@ class WaveInterferenceControlPanel extends WaveInterferencePanel {
       model.sceneProperty
     ) : null;
 
-    let playToneCheckbox = null;
+    const playToneCheckbox = null;
 
     // Only show the Play Tone checkbox for the Sound Scene, if specified.
-    if ( model.soundScene && options.showPlaySoundControl ) {
-      playToneCheckbox = new WaveInterferenceCheckbox( model.soundScene.isTonePlayingProperty, new WaveInterferenceText( playToneString, WaveInterferenceConstants.CONTROL_PANEL_TEXT_MAX_WIDTH_OPTIONS ), {
-        audioEnabled: options.audioEnabled
-      } );
+    // if ( model.soundScene && options.showPlaySoundControl ) {
+    //   playToneCheckbox = new WaveInterferenceCheckbox( model.soundScene.isTonePlayingProperty, new WaveInterferenceText( playToneString, WaveInterferenceConstants.CONTROL_PANEL_TEXT_MAX_WIDTH_OPTIONS ), {
+    //     audioEnabled: options.audioEnabled
+    //   } );
 
-      // In terms of PhET-iO, there could be a situation where a client wants to control the enabledProperty of the
-      // sound-related checkboxes, and toggling the mute button in the navbar will override their customization. There
-      // is precedent for handling this sort of situation in other sims, such as the neutralIndicatorNode in ph-scale
-      // (phetsims/ph-scale#102) and the phaseDiagramContainer in states-of-matter (phetsims/states-of-matter#332).
-      soundManager.enabledProperty.link( enabled => {
-        playToneCheckbox.enabled = enabled;
-      } );
+    //   // In terms of PhET-iO, there could be a situation where a client wants to control the enabledProperty of the
+    //   // sound-related checkboxes, and toggling the mute button in the navbar will override their customization. There
+    //   // is precedent for handling this sort of situation in other sims, such as the neutralIndicatorNode in ph-scale
+    //   // (phetsims/ph-scale#102) and the phaseDiagramContainer in states-of-matter (phetsims/states-of-matter#332).
+    //   soundManager.enabledProperty.link( enabled => {
+    //     playToneCheckbox.enabled = enabled;
+    //   } );
 
-      updatePointerAreas( playToneCheckbox );
-    }
+    //   updatePointerAreas( playToneCheckbox );
+    // }
 
     // Horizontal layout
     const centerX = frequencyControl.centerX;
@@ -203,7 +203,7 @@ class WaveInterferenceControlPanel extends WaveInterferencePanel {
         ...( scene === model.soundScene && playToneCheckbox ? [ playToneCheckbox ] : [] ),
 
         // Wave/Particle selection only for Sound scene
-        ...( scene === model.soundScene && model.soundScene.showSoundParticles ? [ soundViewTypeRadioButtonGroup ] : [] ),
+        // ...( scene === model.soundScene && model.soundScene.showSoundParticles ? [ soundViewTypeRadioButtonGroup ] : [] ),
 
         // Screen & Intensity graph should only be available for light scenes. Remove it from water and sound.
         ...( scene === model.lightScene ? [ screenCheckbox ] : [] ),

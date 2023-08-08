@@ -36,7 +36,7 @@ class SoundScene extends Scene {
     this.showSoundParticles = showSoundParticles;
 
     // @public - indicates the selected view for sound
-    this.soundViewTypeProperty = new Property( SoundScene.SoundViewType.WAVES, {
+    this.soundViewTypeProperty = new Property( SoundScene.SoundViewType.PARTICLES, {
       validValues: SoundScene.SoundViewType.VALUES
     } );
 
@@ -44,7 +44,7 @@ class SoundScene extends Scene {
     this.soundParticles = [];
 
     // @public - indicates whether the user has selected to hear the sine wave
-    this.isTonePlayingProperty = new BooleanProperty( false );
+    this.isTonePlayingProperty = new BooleanProperty( true );
 
     if ( this.showSoundParticles ) {
 
