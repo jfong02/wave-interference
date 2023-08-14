@@ -95,7 +95,7 @@ class WavesScreenSoundView {
       Multilink.multilink( [
         model.soundScene.oscillator1Property,
         model.soundScene.isTonePlayingProperty,
-        view.waveMeterNode.duckingProperty,
+        // view.waveMeterNode.duckingProperty,
         model.isRunningProperty
       ], ( oscillatorValue, isTonePlaying, ducking, isRunning ) => {
 
